@@ -1,0 +1,31 @@
+From 814c5152091ee705dcdf09f86bf6bd08546b4087 Mon Sep 17 00:00:00 2001
+From: Jan Kiszka <jan.kiszka@siemens.com>
+Date: Thu, 16 Sep 2021 12:07:48 +0200
+Subject: [PATCH] linux-module: Override dh_auto_clean
+
+This avoids that fancy out-of-tree makefiles try their own cleaning
+thing and fail in the build environment Debian provides. E.g.
+https://github.com/google/gasket-driver/commit/b0049c17dc39e2511c6cc2f023751b709d66a6d4
+
+Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
+---
+ meta/recipes-kernel/linux-module/files/debian/rules | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/meta/recipes-kernel/linux-module/files/debian/rules b/meta/recipes-kernel/linux-module/files/debian/rules
+index c476bf3..59720b3 100755
+--- a/meta/recipes-kernel/linux-module/files/debian/rules
++++ b/meta/recipes-kernel/linux-module/files/debian/rules
+@@ -24,6 +24,9 @@ ifneq (,$(findstring 86,$(DEB_HOST_GNU_CPU)))
+ export ARCH=x86
+ endif
+ 
++override_dh_auto_clean:
++	$(MAKE) -C $(KDIR) M=$(PWD) clean
++
+ override_dh_auto_build:
+ 	$(MAKE) -C $(KDIR) M=$(PWD) modules
+ 
+-- 
+2.31.1
+

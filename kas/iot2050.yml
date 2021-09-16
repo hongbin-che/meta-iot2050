@@ -34,6 +34,8 @@ repos:
       rootfs-u-boot-fix:
         repo: meta-iot2050
         path: isar-patches/0001-wic-plugins-Improve-rootfs-u-boot-script_prepend-pas.patch
+      linux-module-fix:
+        path: isar-patches/0001-linux-module-Override-dh_auto_clean.patch
 
 bblayers_conf_header:
   standard: |
