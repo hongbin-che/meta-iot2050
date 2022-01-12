@@ -1,0 +1,40 @@
+From 98a040f6447aa713dfed5e5f6cd8e782ed18b35c Mon Sep 17 00:00:00 2001
+From: chao zeng <chao.zeng@siemens.com>
+Date: Mon, 10 Jan 2022 16:22:51 +0800
+Subject: [PATCH] update-uboot-script: dynamic load the dtbo file
+
+add the support to load the dtbo file dynamic
+
+Signed-off-by: chao zeng <chao.zeng@siemens.com>
+---
+ .../u-boot-script/files/update-u-boot-script       | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+diff --git a/meta/recipes-bsp/u-boot-script/files/update-u-boot-script b/meta/recipes-bsp/u-boot-script/files/update-u-boot-script
+index eb2c295..7b20cbb 100755
+--- a/meta/recipes-bsp/u-boot-script/files/update-u-boot-script
++++ b/meta/recipes-bsp/u-boot-script/files/update-u-boot-script
+@@ -68,6 +68,20 @@ if [ -n "${OVERLAYS}" ]; then
+ 		     >> ${BOOT_CMD}
+ 		echo "fdt apply \${overlay_addr_r}" >> ${BOOT_CMD}
+ 	done
++else
++	echo "fdt addr \${fdt_addr_r}" >> ${BOOT_CMD}
++	# grant 1 MB to combined device tree
++	echo "fdt resize 0x100000" >> ${BOOT_CMD}
++	echo "setexpr overlay_addr_r \${fdt_addr_r} + 0x100000" >> ${BOOT_CMD}
++	OVERLAY_PATH=/usr/lib/linux-image-${KERNEL_VERSION}/
++cat << EOF >> ${BOOT_CMD}
++for overlay in \${name_overlays}; do
++	echo Loading ${OVERLAY_PATH}\${overlay}...
++	load \${devtype} \${devnum}:${ROOT_PARTITION} \
++\${overlay_addr_r}  ${OVERLAY_PATH}\${overlay}
++	fdt apply \${overlay_addr_r}
++done
++EOF
+ fi
+ 
+ echo "${BOOT} \${kernel_addr_r} ${INITRD_ADDR} \${fdt_addr_r}" >> ${BOOT_CMD}
+-- 
+2.34.1
+

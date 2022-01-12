@@ -30,6 +30,9 @@ repos:
     refspec: 74036ebaab5265d62cdf90f563acd5b4d3b8b6d2
     layers:
       meta:
+    patches:
+      dynamic-load-dtbo:
+        path: isar-patches/0001-update-uboot-script-dynamic-load-the-dtbo-file.patch
 
 bblayers_conf_header:
   standard: |
