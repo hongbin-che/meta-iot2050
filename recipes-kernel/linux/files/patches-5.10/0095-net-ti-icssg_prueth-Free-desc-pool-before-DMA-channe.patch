@@ -1,7 +1,7 @@
 From 5713793c489814be5092f04f6d6dd290ee5a95a5 Mon Sep 17 00:00:00 2001
 From: Vignesh Raghavendra <vigneshr@ti.com>
 Date: Mon, 21 Jun 2021 15:47:49 +0530
-Subject: [PATCH 095/119] net: ti: icssg_prueth: Free desc pool before DMA
+Subject: [PATCH 095/123] net: ti: icssg_prueth: Free desc pool before DMA
  channel release
 
 Release DMA desc pool associated with channel before releasing the

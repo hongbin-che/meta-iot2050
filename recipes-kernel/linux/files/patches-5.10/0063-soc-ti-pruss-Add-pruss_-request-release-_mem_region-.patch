@@ -1,7 +1,7 @@
 From f55c49a51cee3d9c95aa5255307d8169cf2c01cd Mon Sep 17 00:00:00 2001
 From: "Andrew F. Davis" <afd@ti.com>
 Date: Fri, 26 Mar 2021 16:11:42 -0500
-Subject: [PATCH 063/119] soc: ti: pruss: Add
+Subject: [PATCH 063/123] soc: ti: pruss: Add
  pruss_{request,release}_mem_region() API
 
 Add two new API - pruss_request_mem_region() & pruss_release_mem_region(),

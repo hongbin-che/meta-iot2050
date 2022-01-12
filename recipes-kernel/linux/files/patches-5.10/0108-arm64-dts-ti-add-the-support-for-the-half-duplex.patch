@@ -1,7 +1,7 @@
 From 1e904f78d8d621c21dcaa5cc69f58dedca51acb1 Mon Sep 17 00:00:00 2001
 From: chao zeng <chao.zeng@siemens.com>
 Date: Fri, 22 Oct 2021 13:37:22 +0800
-Subject: [PATCH 108/119] arm64: dts: ti: add the support for the half-duplex
+Subject: [PATCH 108/123] arm64: dts: ti: add the support for the half-duplex
 
 origin from TI and add the dts property to support the half-duplex for ethernet port
 
