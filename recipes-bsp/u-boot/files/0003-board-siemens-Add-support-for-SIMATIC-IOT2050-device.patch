@@ -1,7 +1,7 @@
-From 1530b2afcf32dfcd37fa450e8fa21634e2b5a486 Mon Sep 17 00:00:00 2001
+From a9ba0deef26afbf40e1f67e2895bb67c0146c289 Mon Sep 17 00:00:00 2001
 From: Jan Kiszka <jan.kiszka@siemens.com>
 Date: Mon, 11 May 2020 20:10:16 +0200
-Subject: [PATCH 3/9] board: siemens: Add support for SIMATIC IOT2050 devices
+Subject: [PATCH 03/17] board: siemens: Add support for SIMATIC IOT2050 devices
 
 This adds support for the IOT2050 Basic and Advanced devices. The Basic
 used the dual-core AM6528 GP processor, the Advanced one the AM6548 HS
@@ -735,5 +735,5 @@ index 0000000000..ddb4cfcc8e
 +
 +#endif /* __CONFIG_IOT2050_H */
 -- 
-2.31.1
+2.34.1
 

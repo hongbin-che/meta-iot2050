@@ -1,7 +1,7 @@
-From 05b0710049c12c114b73e7850a81e3fcf75eed68 Mon Sep 17 00:00:00 2001
+From 9571c7997a9e1512c569fe705f3d896fab1c9fc3 Mon Sep 17 00:00:00 2001
 From: Chao Zeng <chao.zeng@siemens.com>
 Date: Tue, 22 Jun 2021 13:21:26 +0800
-Subject: [PATCH 8/9] sf: Querying write-protect status before operating the
+Subject: [PATCH 08/17] sf: Querying write-protect status before operating the
  flash
 
 When operating the write-protection flash,spi_flash_std_write() and
@@ -45,5 +45,5 @@ index 6c87434867..29b465b296 100644
  }
  
 -- 
-2.31.1
+2.34.1
 

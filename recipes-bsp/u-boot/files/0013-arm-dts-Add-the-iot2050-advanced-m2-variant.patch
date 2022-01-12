@@ -1,0 +1,54 @@
+From 95a51b1658fc30fe1e9a3a9ddc88f16d8ff3999f Mon Sep 17 00:00:00 2001
+From: chao zeng <chao.zeng@siemens.com>
+Date: Wed, 12 Jan 2022 10:38:28 +0800
+Subject: [PATCH 13/17] arm:dts:Add the iot2050 advanced m2 variant
+
+there is a variant of iot2050, add the support for
+this new variant
+
+Signed-off-by: chao zeng <chao.zeng@siemens.com>
+---
+ arch/arm/dts/k3-am65-iot2050-boot-image.dtsi | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+
+diff --git a/arch/arm/dts/k3-am65-iot2050-boot-image.dtsi b/arch/arm/dts/k3-am65-iot2050-boot-image.dtsi
+index 69479d7b18..9ca8edb47a 100644
+--- a/arch/arm/dts/k3-am65-iot2050-boot-image.dtsi
++++ b/arch/arm/dts/k3-am65-iot2050-boot-image.dtsi
+@@ -81,6 +81,16 @@
+ 					};
+ 				};
+ 
++				fdt-iot2050-advanced-m2 {
++					description = "k3-am6548-iot2050-advanced-m2.dtb";
++					type = "flat_dt";
++					arch = "arm64";
++					compression = "none";
++					blob {
++						filename = "arch/arm/dts/k3-am6548-iot2050-advanced-m2.dtb";
++					};
++				};
++
+ #ifdef CONFIG_WDT_K3_RTI_FW_FILE
+ 				k3-rti-wdt-firmware {
+ 					type = "firmware";
+@@ -133,6 +143,16 @@
+ 					loadables = "k3-rti-wdt-firmware";
+ #endif
+ 				};
++
++				conf-iot2050-advanced-m2 {
++					description = "iot2050-advanced-m2";
++					firmware = "u-boot";
++					fdt = "fdt-iot2050-advanced-m2";
++#ifdef CONFIG_WDT_K3_RTI_FW_FILE
++					loadables = "k3-rti-wdt-firmware";
++#endif
++				};
++
+ 			};
+ 		};
+ 
+-- 
+2.34.1
+

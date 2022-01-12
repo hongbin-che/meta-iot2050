@@ -1,0 +1,30 @@
+From 0f680bc65d4fc95928a5d6dbf8ee80512a95c66e Mon Sep 17 00:00:00 2001
+From: chao zeng <chao.zeng@siemens.com>
+Date: Wed, 12 Jan 2022 10:34:18 +0800
+Subject: [PATCH 12/17] board:siemes:iot2050: use the named gpio to control the
+ user-button
+
+Has already add the gpio controll base as the prefix, using the named gpio
+to control the user button
+
+Signed-off-by: chao zeng <chao.zeng@siemens.com>
+---
+ board/siemens/iot2050/board.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/board/siemens/iot2050/board.c b/board/siemens/iot2050/board.c
+index 41f05085a9..74fb4aa4c1 100644
+--- a/board/siemens/iot2050/board.c
++++ b/board/siemens/iot2050/board.c
+@@ -351,7 +351,7 @@ static bool user_button_pressed(void)
+ 
+ 	memset(&gpio, 0, sizeof(gpio));
+ 
+-	if (dm_gpio_lookup_name("25", &gpio) < 0 ||
++	if (dm_gpio_lookup_name("gpio@42110000_25", &gpio) < 0 ||
+ 	    dm_gpio_request(&gpio, "USER button") < 0 ||
+ 	    dm_gpio_set_dir_flags(&gpio, GPIOD_IS_IN) < 0)
+ 		return false;
+-- 
+2.34.1
+

@@ -1,0 +1,26 @@
+From dfb9a6024e6a6d3449faf53418ac14c86d83946b Mon Sep 17 00:00:00 2001
+From: chao zeng <chao.zeng@siemens.com>
+Date: Wed, 12 Jan 2022 14:48:18 +0800
+Subject: [PATCH 16/17] iot2050: Enable set expr command
+
+Signed-off-by: chao zeng <chao.zeng@siemens.com>
+---
+ configs/iot2050_defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configs/iot2050_defconfig b/configs/iot2050_defconfig
+index 48875f232c..82b6dfedb0 100644
+--- a/configs/iot2050_defconfig
++++ b/configs/iot2050_defconfig
+@@ -51,7 +51,7 @@ CONFIG_CMD_PCI=y
+ CONFIG_CMD_REMOTEPROC=y
+ CONFIG_CMD_USB=y
+ CONFIG_CMD_WDT=y
+-# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_SETEXPR=y
+ CONFIG_CMD_TIME=y
+ CONFIG_CMD_GPIO=y
+ # CONFIG_ISO_PARTITION is not set
+-- 
+2.34.1
+
