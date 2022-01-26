@@ -20,8 +20,25 @@ jobs:
           echo "GITHUB_SHA: ${GITHUB_SHA}"
           echo "GITHUB_REF_NAME: ${GITHUB_REF_NAME}"
           echo "GITHUB_REF_TYPE: ${GITHUB_REF_TYPE}"
-              
+
+  bootloaders:
+    name: Bootloaders for both PG1 and PG2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build bootloader image for PG1
+        run: ./kas-container build kas-iot2050-boot-pg1.yml
+      - name: Build bootloader image for PG2
+        run: ./kas-container build kas-iot2050-boot-pg2.yml
+      - name: Archive bootloaders
+        uses: actions/upload-artifact@v2
+        with:
+          name: iot2050-bootloaders
+          path: build/tmp/deploy/images/iot2050/*.bin
+
   debian-example-image:
+    needs: bootloaders
     name: Debian example image
     runs-on: ubuntu-latest
     steps:
@@ -53,22 +70,6 @@ jobs:
             build/tmp/deploy/images/iot2050/iot2050-image-example-iot2050-debian-iot2050.wic.img
             build/tmp/deploy/images/iot2050/iot2050-image-example-iot2050-debian-iot2050.wic.img.bmap
 
-  bootloaders:
-    name: Bootloaders for both PG1 and PG2
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Build bootloader image for PG1
-        run: ./kas-container build kas-iot2050-boot-pg1.yml
-      - name: Build bootloader image for PG2
-        run: ./kas-container build kas-iot2050-boot-pg2.yml
-      - name: Archive bootloaders
-        uses: actions/upload-artifact@v2
-        with:
-          name: iot2050-bootloaders
-          path: build/tmp/deploy/images/iot2050/*.bin
-  
   download_bootloaders:
     needs: bootloaders
     runs-on: [self-hosted, Linux_527]
@@ -105,4 +106,14 @@ jobs:
           name: iot2050-example-image-rt
           path: |
             download/${{github.event.pull_request.number}}/example-image
+            
+  trigger-Test-Actions:
+    needs: download_debian-example-image
+    runs-on: [self-hosted, Linux_527]
+    steps:
+      - name: trigger-test-request
+        run: |
+          echo "### Start trigger"
+          echo "#### Pull_request number: ${{github.event.pull_request.number}}"
+          echo "#### Download dir: ${{github.action_path}}/download/${{github.event.pull_request.number}}"
 
